@@ -106,6 +106,10 @@ __myevic__ void TMR2_IRQHandler()
 		gFlags.tick_1khz = 1;
 		gFlags.tick_us = 1;
 
+		if(TimerCount > 0)
+			AlertTick();
+
+
 		if ( !(++TMR2Counter % 10) )
 		{
 			gFlags.tick_100hz = 1;
@@ -163,6 +167,9 @@ __myevic__ void TimedItems()
 
 	if ( !Screen && SleepTimer )
 		--SleepTimer;
+
+	if(HasAlert > 0)
+		AlertShow();
 
 	if ( ISVTCDUAL )
 	{

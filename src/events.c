@@ -346,6 +346,10 @@ __myevic__ void GetUserInput()
 				FireClickCount = 1;
 			}
 
+			if ( HasAlert > 0 ) {
+				HasAlert = 0;
+			}
+
 			switch ( FireClickCount )
 			{
 				case 1:
@@ -396,6 +400,10 @@ __myevic__ void GetUserInput()
 
 						case CLICK_ACTION_GAME:
 							FireClicksEvent = 40;	// Game
+							break;
+
+						case CLICK_ACTION_TIMER:
+							FireClicksEvent = 41;	// Game
 							break;
 					}
 					if ( dfStatus.off )
@@ -606,6 +614,13 @@ __myevic__ int EvtFire()
 		}
 		break;
 
+		case 108:
+		{
+			Event = EVENT_PARENT_MENU;
+			vret = 1;
+		}
+		break;
+
 		case 102:
 		{
 			vret = MenuEvent( LastEvent );
@@ -737,6 +752,17 @@ __myevic__ int EvtPlusButton()
 			else dfContrast = 255;
 			UpdateDFTimer = 50;
 			DisplaySetContrast( dfContrast );
+			gFlags.refresh_display = 1;
+			ScreenDuration = 10;
+			vret = 1;
+		}
+		break;
+
+		case 108:
+		{
+			if ( TimerCount <= 55 ) TimerCount += 5;
+			else TimerCount = 0;
+			TimerTicks = 0;
 			gFlags.refresh_display = 1;
 			ScreenDuration = 10;
 			vret = 1;
@@ -889,6 +915,17 @@ __myevic__ int EvtMinusButton()
 			else dfContrast = 0;
 			UpdateDFTimer = 50;
 			DisplaySetContrast( dfContrast );
+			gFlags.refresh_display = 1;
+			ScreenDuration = 10;
+			vret = 1;
+		}
+		break;
+
+		case 108:
+		{
+			if ( TimerCount >= 5 ) TimerCount -= 5;
+			else TimerCount = 0;
+			TimerTicks = 0;
 			gFlags.refresh_display = 1;
 			ScreenDuration = 10;
 			vret = 1;
@@ -1270,6 +1307,10 @@ __myevic__ int CustomEvents()
 
 		case 40: // Game
 			fbStartGame();
+			break;
+
+		case 41: // timer alert
+			SetScreen(108, 10);
 			break;
 
 		case EVENT_POWER_CURVE:

@@ -26,6 +26,9 @@ typedef struct {
 extern const uint8_t ByteMaskRight[];
 extern const uint8_t ByteMaskLeft[];
 
+extern uint8_t HasAlert;
+extern uint16_t TimerDiff;
+extern uint32_t TimerTicks;
 extern uint8_t DisplayModel;
 extern uint8_t ScreenBuffer[];
 
@@ -49,6 +52,7 @@ extern void ClearScreenBuffer();
 extern void DisplayRefresh();
 extern void Screen2Bitmap( uint8_t *pu8Bitmap );
 extern void DisplaySetFont();
+extern void AlertShow();
 
 extern int GetImageWidth( const uint8_t imgnum );
 extern int GetStringWidth( const uint8_t str[] );

@@ -26,6 +26,8 @@ uint16_t	EditModeTimer;
 uint8_t		ShowWeakBatFlag;
 uint8_t		BatAnimLevel;
 
+uint8_t		TimerCount;
+
 
 //=========================================================================
 // Change Screen
@@ -191,6 +193,10 @@ __myevic__ void DrawScreen()
 
 			case 107:
 				ShowPowerCurve();
+				break;
+
+			case 108:
+				ShowTimer();
 				break;
 			
 			default:
@@ -430,7 +436,6 @@ __myevic__ void ChargeView()
 __myevic__ void ShowInfos()
 {
 	uint8_t strbuf[20];
-
 	// TODO : infos page
 	convert_string1( strbuf, "Ferox" );
 	DrawStringCentered( strbuf, 82 );
@@ -468,6 +473,21 @@ __myevic__ void ShowContrast()
 	DrawStringCentered( String_Exit, 67 );
 
 	DrawLOGO( 0, 88 );
+}
+
+__myevic__ void ShowTimer()
+{
+
+	DrawString( String_Timer, 4, 6 );
+	DrawHLine( 0, 16, 63, 1 );
+
+	DrawValue( 16, 20, TimerCount, 0, 0x0B, 0 );
+	DrawString( String_Mins, 28, 20 );
+
+        DrawStringCentered( String_Fireto, 57 );
+        DrawStringCentered( String_Exit, 67 );
+
+	DrawLOGO( 0, 80 );
 }
 
 

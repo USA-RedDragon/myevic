@@ -1253,7 +1253,7 @@ __myevic__ void EventHandler()
 							break;
 
 						case 4:
-							if ( ++dfAPT > 9 ) dfAPT = 0;
+							if ( ++dfAPT > 10 ) dfAPT = 0;
 							break;
 
 						case 5:

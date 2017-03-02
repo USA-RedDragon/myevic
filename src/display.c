@@ -2,12 +2,16 @@
 #include "display.h"
 #include "dataflash.h"
 #include "screens.h"
+#include "timers.h"
 
 
 //=========================================================================
 
 uint8_t	DisplayModel;
 uint8_t	DisplayCmdByte;
+uint8_t	HasAlert = 0;
+uint16_t TimerDiff = 0;
+uint32_t TimerTicks = 0;
 
 const image_t **Images;
 
@@ -678,3 +682,31 @@ __myevic__ void DisplaySetFont()
 	}
 }
 
+__myevic__ void AlertShow() {
+	static uint8_t ticks = 0;
+	ticks++;
+	if ( ticks % 30 == 0 && ticks % 60 != 0 && HasAlert > 0 ) {
+		DisplaySetInverse( !dfStatus.invert );
+	}
+	else if ( ticks % 60 == 0 && HasAlert > 0 ) {
+		ticks=0;
+		DisplaySetInverse( dfStatus.invert );
+	} 
+	else if ( HasAlert == 0 ) {
+		DisplaySetInverse( dfStatus.invert );
+	}
+}
+
+__myevic__ void AlertTick() {
+	TimerTicks++;
+	if ( TimerTicks % 1000 == 0 ) {
+		TimerDiff=(TimerCount * 60) - (TimerTicks/1000);
+		gFlags.refresh_display = 1;
+	}
+	if(TimerDiff < 0) {
+		HasAlert=1;
+		TimerDiff=0;
+		TimerTicks=0;
+		TimerCount=0;
+	}
+}

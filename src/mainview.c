@@ -323,7 +323,16 @@ __myevic__ void DrawAPTLine( int line )
 			break;
 		}
 
-		case 7:	// Board temperature
+		case 7:	// Timer left
+		{
+			DrawString( String_Timer, 0, line+2 );
+			if(((uint8_t) (TimerDiff / 60)) > 0) DrawValue( 30, line, (uint8_t) (TimerDiff / 60), 0, 0x1F, 0 
+);
+			DrawValue( 45, line, (TimerDiff % 60), 0, 0x1F, 0 );
+			break;
+		}
+
+		case 8:	// Board temperature
 		{
 			DrawString( String_BOARD_s, 0, line+2 );
 
@@ -334,7 +343,7 @@ __myevic__ void DrawAPTLine( int line )
 			break;
 		}
 
-		case 8:	// Real-time atomizer resistance
+		case 9:	// Real-time atomizer resistance
 		{
 			int rez = AtoError ? 0 : AtoRezMilli;
 			int nd = ( rez < 1000 ) ? 3 : 4;
@@ -346,7 +355,7 @@ __myevic__ void DrawAPTLine( int line )
 			break;
 		}
 
-		case 9:	// Real-time clock
+		case 10: // Real-time clock
 		{
 			S_RTC_TIME_DATA_T rtd;
 			GetRTC( &rtd );

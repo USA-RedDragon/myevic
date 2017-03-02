@@ -20,6 +20,8 @@ extern uint8_t	SplashTimer;
 extern uint8_t	EditItemIndex;
 extern uint16_t	EditModeTimer;
 
+extern uint8_t	TimerCount;
+
 extern const uint8_t ScrSaveTimes[8];
 extern const uint8_t ScrMainTimes[6];
 
@@ -61,6 +63,7 @@ extern void Show10sProtec();
 extern void ShowWeakBat();
 extern void ShowInfos();
 extern void ShowContrast();
+extern void ShowTimer();
 extern void ShowMenus();
 extern void ShowRTCSpeed();
 extern void ShowRTCAdjust();
@@ -143,6 +146,8 @@ extern const uint8_t String_COIL_s[];
 extern const uint8_t String_TIME_s[];
 extern const uint8_t String_PUFF_s[];
 extern const uint8_t String_SMART[];
+extern const uint8_t String_Timer[];
+extern const uint8_t String_TimerLength[];
 extern const uint8_t String_End[];
 
 //-------------------------------------------------------------------------
@@ -197,6 +202,7 @@ extern const uint8_t String_Qix[];
 extern const uint8_t String_None[];
 extern const uint8_t String_Screen[];
 extern const uint8_t String_Min[];
+extern const uint8_t String_Mins[];
 extern const uint8_t String_VCOM[];
 extern const uint8_t String_Expert[];
 extern const uint8_t String_USB[];
