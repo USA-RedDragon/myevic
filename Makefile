@@ -8,8 +8,12 @@ TARGET := myevic
 
 # Small fix to bug where cygpath -w mistranslates paths with mixed slashes (/, \)
 EVICSDK := $(subst \,/,$(EVICSDK))
+ifeq ($(EVICSDK),"")
+    $(error $(EVICSDK))
+else
+    EVICSDK := .
+endif
 NUVOSDK = $(EVICSDK)/nuvoton-sdk/Library
-
 OBJS := $(NUVOSDK)/Device/Nuvoton/M451Series/Source/system_M451Series.o \
 	$(NUVOSDK)/StdDriver/src/clk.o \
 	$(NUVOSDK)/StdDriver/src/fmc.o \
