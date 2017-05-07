@@ -299,7 +299,7 @@ __myevic__ void SetProductID()
 			BoxModel = BOX_RX300;
 			NumBatteries = 4;
 			MaxBatteries = 4;
-			MaxCurrent = 50;
+			MaxCurrent = 65;
 			gFlags.pwm_pll = 1;
 			X32Off = 1;
 			break;
@@ -1071,7 +1071,7 @@ __myevic__ void InitDataFlash()
 	}
 	else if ( ISRX300 )
 	{
-		MaxPower = 3000;
+		MaxPower = 4000;
 	}
 	else
 	{
